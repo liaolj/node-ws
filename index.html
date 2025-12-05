@@ -1,722 +1,331 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>慢时光 | 咖啡屋伴侣</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
         body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Nunito', sans-serif;
+            background-color: #FDFBF7; /* 奶油色背景 */
+            color: #4A403A; /* 深咖啡色字体 */
+        }
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        /* 呼吸动画 */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.4; }
+        }
+        .breathing-circle {
+            animation: breathe 8s infinite ease-in-out;
         }
 
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
+        /* 隐藏滚动条但允许滚动 */
+        .no-scrollbar::-webkit-scrollbar {
             display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
         }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+<body class="antialiased min-h-screen flex flex-col items-center justify-center relative overflow-hidden selection:bg-[#D4A373] selection:text-white">
+
+    <!-- 背景装饰元素 -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[#E8DCC4] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#D6C0B0] rounded-full mix-blend-multiply filter blur-3xl opacity-30" style="animation-duration: 10s"></div>
+    </div>
+
+    <!-- 主容器 -->
+    <main class="w-full max-w-md md:max-w-2xl lg:max-w-4xl h-screen md:h-auto md:min-h-[90vh] flex flex-col md:flex-row shadow-2xl md:rounded-3xl overflow-hidden bg-[#FAFAF5]">
+        
+        <!-- 左侧/顶部：氛围与导航 -->
+        <section class="w-full md:w-2/5 bg-[#2C241F] text-[#E0Dbd4] p-8 flex flex-col justify-between relative overflow-hidden">
+            <!-- 装饰纹理 -->
+            <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/paper.png');"></div>
+            
+            <div class="z-10">
+                <div class="flex items-center gap-2 opacity-80 mb-8">
+                    <i data-lucide="coffee" class="w-5 h-5"></i>
+                    <span class="text-xs tracking-[0.2em] uppercase">Slow Life</span>
                 </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                
+                <h1 class="serif text-4xl md:text-5xl font-light leading-tight mb-4">
+                    偷得<br>浮生<br><span class="italic text-[#D4A373]">半日闲</span>
+                </h1>
+                
+                <p class="text-sm opacity-60 leading-relaxed font-light mt-4">
+                    将手机调至静音，<br>
+                    专注于手中的温热，<br>
+                    这里是属于你的精神角落。
+                </p>
+            </div>
+
+            <div class="mt-12 md:mt-0 z-10">
+                <div class="flex flex-col gap-4">
+                    <div id="clock" class="serif text-5xl font-thin opacity-90">00:00</div>
+                    <div id="date" class="text-xs tracking-widest opacity-50 uppercase">Loading...</div>
+                </div>
+            </div>
+            
+            <!-- 呼吸指示器 (仅装饰) -->
+            <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-[#D4A373] rounded-full filter blur-[80px] opacity-20 breathing-circle pointer-events-none"></div>
+        </section>
+
+        <!-- 右侧/底部：内容区域 -->
+        <section class="w-full md:w-3/5 h-full relative flex flex-col">
+            
+            <!-- 顶部标签导航 -->
+            <nav class="flex border-b border-stone-200 bg-white/50 backdrop-blur-sm sticky top-0 z-20">
+                <button onclick="switchTab('read')" class="tab-btn flex-1 py-4 text-sm font-medium text-stone-500 hover:text-[#8C6B5D] transition-colors border-b-2 border-transparent data-[active=true]:border-[#8C6B5D] data-[active=true]:text-[#2C241F]" data-active="true" data-tab="read">
+                    <div class="flex items-center justify-center gap-2">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span>阅览</span>
+                    </div>
+                </button>
+                <button onclick="switchTab('focus')" class="tab-btn flex-1 py-4 text-sm font-medium text-stone-500 hover:text-[#8C6B5D] transition-colors border-b-2 border-transparent data-[active=true]:border-[#8C6B5D] data-[active=true]:text-[#2C241F]" data-tab="focus">
+                    <div class="flex items-center justify-center gap-2">
+                        <i data-lucide="wind" class="w-4 h-4"></i>
+                        <span>呼吸</span>
+                    </div>
+                </button>
+                <button onclick="switchTab('ambience')" class="tab-btn flex-1 py-4 text-sm font-medium text-stone-500 hover:text-[#8C6B5D] transition-colors border-b-2 border-transparent data-[active=true]:border-[#8C6B5D] data-[active=true]:text-[#2C241F]" data-tab="ambience">
+                    <div class="flex items-center justify-center gap-2">
+                        <i data-lucide="headphones" class="w-4 h-4"></i>
+                        <span>氛围</span>
+                    </div>
+                </button>
             </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+            <!-- 内容容器 -->
+            <div class="flex-1 overflow-y-auto no-scrollbar p-6 md:p-10 relative">
+                
+                <!-- 1. 阅览板块 -->
+                <div id="tab-read" class="content-panel space-y-8 animate-fade-in">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold text-[#D4A373] tracking-wider uppercase">Today's Selection</span>
+                        <h2 class="serif text-2xl text-[#2C241F]">那杯咖啡里的宇宙</h2>
+                    </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <div class="prose prose-stone prose-p:text-[#5D5550] prose-p:leading-loose prose-p:font-light">
+                        <p>
+                            村上春树曾说：“如果一个城市没有愿意开咖啡馆的人，那这个城市无论多有钱，都只是一个内心空虚的城市。”
+                        </p>
+                        <p>
+                            当你推开这扇沉重的木门，风铃轻响，外界的喧嚣便被隔绝在身后。咖啡机蒸汽的嘶嘶声，是这个空间独有的心跳。
+                        </p>
+                        <div class="my-6 rounded-xl overflow-hidden shadow-lg opacity-90 hover:opacity-100 transition-opacity">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Aesthetic" class="w-full h-48 object-cover">
+                        </div>
+                        <p>
+                            在这里，时间变得浓稠。你可以观察窗外的行人，看雨滴划过玻璃留下的痕迹，或者仅仅是盯着杯中不断旋转融合的奶泡。此刻，不需要效率，不需要回复消息，只需要感受“存在”本身。
+                        </p>
+                        <p class="text-sm italic text-right mt-4">— 慢时光编辑部</p>
+                    </div>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
+                    <div class="pt-8 border-t border-stone-200">
+                        <h3 class="serif text-lg mb-4 text-[#2C241F]">灵感碎片</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-stone-100 hover:shadow-md transition-shadow cursor-pointer group">
+                                <i data-lucide="pen-tool" class="w-5 h-5 text-[#D4A373] mb-2 group-hover:scale-110 transition-transform"></i>
+                                <div class="text-sm font-medium text-[#4A403A]">随笔记录</div>
+                                <div class="text-xs text-stone-400 mt-1">捕捉稍纵即逝的想法</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-stone-100 hover:shadow-md transition-shadow cursor-pointer group">
+                                <i data-lucide="camera" class="w-5 h-5 text-[#D4A373] mb-2 group-hover:scale-110 transition-transform"></i>
+                                <div class="text-sm font-medium text-[#4A403A]">观察练习</div>
+                                <div class="text-xs text-stone-400 mt-1">描述一件眼前的小物</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+                <!-- 2. 呼吸板块 -->
+                <div id="tab-focus" class="content-panel hidden h-full flex flex-col items-center justify-center text-center space-y-8">
+                    <div class="relative w-48 h-48 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-[#D4A373] rounded-full opacity-20 breathing-circle"></div>
+                        <div class="absolute inset-4 bg-[#D4A373] rounded-full opacity-20 breathing-circle" style="animation-delay: 1s"></div>
+                        <div class="z-10 text-[#2C241F] serif text-lg font-medium tracking-widest" id="breath-text">
+                            吸气
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-xs mx-auto">
+                        <h3 class="serif text-xl mb-2 text-[#2C241F]">4-7-8 呼吸法</h3>
+                        <p class="text-sm text-stone-500 font-light leading-relaxed">
+                            闭上眼睛，深深吸气，感受咖啡的香气充满胸腔。让焦虑随着呼气慢慢消散。
+                        </p>
+                    </div>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <button class="px-6 py-2 rounded-full border border-[#D4A373] text-[#8C6B5D] text-sm hover:bg-[#D4A373] hover:text-white transition-all">
+                        开始引导
+                    </button>
+                </div>
+
+                <!-- 3. 氛围板块 -->
+                <div id="tab-ambience" class="content-panel hidden space-y-6">
+                    <div class="text-center mb-8">
+                        <h2 class="serif text-xl text-[#2C241F]">声音景观</h2>
+                        <p class="text-xs text-stone-400 mt-2">点击图标混合属于你的白噪音</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- 声音卡片 1 -->
+                        <button class="sound-card group relative overflow-hidden bg-white p-6 rounded-2xl shadow-sm border border-stone-100 text-left transition-all hover:border-[#D4A373]" onclick="toggleSound(this)">
+                            <div class="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                            <i data-lucide="cloud-rain" class="w-8 h-8 text-stone-300 group-hover:text-[#607D8B] mb-3 transition-colors"></i>
+                            <div class="font-bold text-stone-600">窗外雨声</div>
+                            <div class="text-xs text-stone-400 mt-1">Rainy Mood</div>
+                            <div class="h-1 w-full bg-stone-100 mt-4 rounded-full overflow-hidden">
+                                <div class="h-full bg-[#607D8B] w-0 transition-all duration-700 group-[.active]:w-2/3"></div>
+                            </div>
+                        </button>
+
+                        <!-- 声音卡片 2 -->
+                        <button class="sound-card group relative overflow-hidden bg-white p-6 rounded-2xl shadow-sm border border-stone-100 text-left transition-all hover:border-[#D4A373]" onclick="toggleSound(this)">
+                            <div class="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                            <i data-lucide="flame" class="w-8 h-8 text-stone-300 group-hover:text-[#D4A373] mb-3 transition-colors"></i>
+                            <div class="font-bold text-stone-600">壁炉柴火</div>
+                            <div class="text-xs text-stone-400 mt-1">Fireplace</div>
+                            <div class="h-1 w-full bg-stone-100 mt-4 rounded-full overflow-hidden">
+                                <div class="h-full bg-[#D4A373] w-0 transition-all duration-700 group-[.active]:w-1/2"></div>
+                            </div>
+                        </button>
+
+                         <!-- 声音卡片 3 -->
+                         <button class="sound-card group relative overflow-hidden bg-white p-6 rounded-2xl shadow-sm border border-stone-100 text-left transition-all hover:border-[#D4A373]" onclick="toggleSound(this)">
+                            <div class="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                            <i data-lucide="coffee" class="w-8 h-8 text-stone-300 group-hover:text-[#8D6E63] mb-3 transition-colors"></i>
+                            <div class="font-bold text-stone-600">店堂人声</div>
+                            <div class="text-xs text-stone-400 mt-1">Coffee Shop</div>
+                            <div class="h-1 w-full bg-stone-100 mt-4 rounded-full overflow-hidden">
+                                <div class="h-full bg-[#8D6E63] w-0 transition-all duration-700 group-[.active]:w-3/4"></div>
+                            </div>
+                        </button>
+
+                        <!-- 声音卡片 4 -->
+                        <button class="sound-card group relative overflow-hidden bg-white p-6 rounded-2xl shadow-sm border border-stone-100 text-left transition-all hover:border-[#D4A373]" onclick="toggleSound(this)">
+                            <div class="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                            <i data-lucide="music" class="w-8 h-8 text-stone-300 group-hover:text-[#5C6BC0] mb-3 transition-colors"></i>
+                            <div class="font-bold text-stone-600">爵士乐</div>
+                            <div class="text-xs text-stone-400 mt-1">Soft Jazz</div>
+                            <div class="h-1 w-full bg-stone-100 mt-4 rounded-full overflow-hidden">
+                                <div class="h-full bg-[#5C6BC0] w-0 transition-all duration-700 group-[.active]:w-1/2"></div>
+                            </div>
+                        </button>
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
+
+            </div>
+            
+            <!-- 底部播放条装饰 (静态) -->
+            <div class="p-4 bg-white/80 backdrop-blur-md border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-stone-200 rounded flex items-center justify-center">
+                        <i data-lucide="play" class="w-3 h-3 fill-current text-stone-500"></i>
+                    </div>
+                    <div>
+                        <div class="text-stone-800 font-medium">Lofi Study Beats</div>
+                        <div class="text-[10px]">Ambient Radio</div>
+                    </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
+                <div class="flex gap-1">
+                    <span class="w-1 h-3 bg-[#D4A373] rounded-full animate-[pulse_1s_ease-in-out_infinite]"></span>
+                    <span class="w-1 h-4 bg-[#D4A373] rounded-full animate-[pulse_1.2s_ease-in-out_infinite]"></span>
+                    <span class="w-1 h-2 bg-[#D4A373] rounded-full animate-[pulse_0.8s_ease-in-out_infinite]"></span>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+
+        </section>
+    </main>
 
     <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+        // 初始化图标
+        lucide.createIcons();
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
+        // 时钟功能
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const dateOptions = { month: 'short', day: 'numeric', weekday: 'long' };
+            const dateString = now.toLocaleDateString('en-US', dateOptions); // 英文日期更配设计风格
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+            document.getElementById('date').textContent = dateString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 标签切换逻辑
+        function switchTab(tabId) {
+            // 隐藏所有面板
+            document.querySelectorAll('.content-panel').forEach(el => {
+                el.classList.add('hidden');
+            });
+            // 显示目标面板
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // 更新按钮状态
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                const isActive = btn.dataset.tab === tabId;
+                btn.dataset.active = isActive;
                 
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
+                // 重新着色图标
+                const icon = btn.querySelector('i');
+                if(isActive) {
+                    btn.classList.add('text-[#2C241F]');
                 } else {
-                    counter.innerText = target;
+                    btn.classList.remove('text-[#2C241F]');
                 }
             });
         }
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+        // 声音开关视觉效果
+        function toggleSound(element) {
+            element.classList.toggle('active');
+            element.classList.toggle('border-[#D4A373]');
+            element.classList.toggle('bg-stone-50');
+            
+            // 这里可以添加实际的音频播放逻辑
+            // const audio = new Audio('path/to/sound.mp3');
+            // ...
+        }
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
+        // 呼吸文字循环
+        const breathText = document.getElementById('breath-text');
+        const phrases = ['吸气', '保持', '呼气', '放松'];
+        let phraseIndex = 0;
+        
+        // 简单的文字切换模拟呼吸节奏
+        setInterval(() => {
+            // 这个节奏只是简单的视觉演示，配合 CSS 动画
+            const time = new Date().getTime();
+            // 实际应用中会配合更复杂的定时器
+        }, 4000);
+
     </script>
 </body>
-
 </html>
